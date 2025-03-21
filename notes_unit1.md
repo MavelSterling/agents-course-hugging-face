@@ -218,7 +218,7 @@ El agente Alfred sigue el ciclo:
 ✔ **Integración de herramientas:** Permiten que el agente acceda a información en tiempo real.  
 ✔ **Adaptación dinámica:** Cada ciclo mejora la respuesta del agente basándose en nuevas observaciones.  
 ----
-### **Resumen: Razonamiento Interno y el Enfoque ReAct en los Agentes de IA**  
+### **Razonamiento Interno y el Enfoque ReAct en los Agentes de IA**  
 
 El **razonamiento interno (Thought)** de un agente de IA es su capacidad para analizar información, descomponer problemas complejos en pasos más manejables y decidir qué acción tomar a continuación. Este proceso permite a los modelos **ajustar sus planes en función de nueva información y reflexionar sobre decisiones previas**.
 
@@ -288,3 +288,83 @@ Además, modelos como **Deepseek R1 y OpenAI’s o1** han sido entrenados para i
 
 ### **Notas**  
 El uso de **ReAct** y **Chain of Thought (CoT)** mejora la capacidad de los agentes de IA para **razonar antes de responder**, lo que resulta en respuestas más precisas y estructuradas. **Zero-Shot y Few-Shot** permiten ajustar el nivel de contexto necesario, con **Zero-Shot-CoT y Few-Shot-CoT** ofreciendo las mejores soluciones para tareas complejas.
+----
+### **Acciones en los Agentes de IA**  
+
+Las **acciones** son los pasos concretos que un agente de IA realiza para interactuar con su entorno, como buscar información, llamar APIs o controlar dispositivos. Para ejecutarlas, los agentes pueden representar las acciones en **JSON, código o llamadas a funciones**.
+
+---
+
+### **Tipos de Agentes según su Ejecución de Acciones**  
+
+| **Tipo de Agente**       | **Descripción** |
+|------------------------|----------------|
+| **JSON Agent**         | Genera acciones en formato JSON. |
+| **Code Agent**         | Escribe código ejecutable para realizar acciones. |
+| **Function-calling Agent** | Subcategoría del JSON Agent que genera un nuevo mensaje estructurado para cada acción. |
+
+Las acciones pueden clasificarse en:  
+
+✔ **Recopilación de información:** Consultas web, bases de datos, recuperación de documentos.  
+✔ **Uso de herramientas:** Llamadas a API, cálculos, ejecución de código.  
+✔ **Interacción con el entorno:** Control de interfaces digitales o dispositivos físicos.  
+✔ **Comunicación:** Chat con usuarios o colaboración entre agentes.  
+
+---
+
+### **El Enfoque "Stop and Parse"**  
+
+Para evitar errores y salidas no deseadas, los agentes deben **detener la generación de tokens una vez completada una acción**.  
+
+1. **Generación en un formato estructurado** (JSON o código).  
+2. **Detención de la generación** tras definir la acción.  
+3. **Parseo de la salida** para extraer la función a ejecutar y los parámetros requeridos.  
+
+#### **Ejemplo: JSON Agent llamando a una API del clima**  
+```json
+{
+  "action": "get_weather",
+  "action_input": {"location": "New York"}
+}
+```
+Esto permite que el framework identifique la función `get_weather` y extraiga el parámetro `"New York"`.
+
+---
+
+### **Code Agents: Generación de Código Ejecutable**  
+
+En lugar de JSON, un **Code Agent** genera código en un lenguaje como Python.  
+
+✔ **Mayor expresividad:** Puede incluir bucles, condicionales y lógica más avanzada.  
+✔ **Modularidad:** Puede reutilizar funciones en varias tareas.  
+✔ **Depuración más sencilla:** Errores en el código son más fáciles de detectar.  
+✔ **Integración directa:** Permite conectar con bibliotecas y APIs.  
+
+#### **Ejemplo: Code Agent llamando a una API del clima en Python**  
+```python
+def get_weather(city):
+    import requests
+    api_url = f"https://api.weather.com/v1/location/{city}?apiKey=YOUR_API_KEY"
+    response = requests.get(api_url)
+    if response.status_code == 200:
+        data = response.json()
+        return data.get("weather", "No weather information available")
+    else:
+        return "Error: Unable to fetch weather data."
+
+# Ejecutar la función y mostrar el resultado
+result = get_weather("New York")
+print(f"The current weather in New York is: {result}")
+```
+**Flujo del Code Agent:**  
+1. Genera código que llama a la API.  
+2. Procesa la respuesta.  
+3. Imprime el resultado como salida final.  
+
+---
+
+### **Notas**  
+✔ **Los agentes de IA ejecutan acciones en distintos formatos** (JSON, código o llamadas a funciones).  
+✔ **El método "Stop and Parse" garantiza respuestas precisas y estructuradas.**  
+✔ **Los Code Agents ofrecen mayor flexibilidad, pero requieren ejecución externa.**  
+
