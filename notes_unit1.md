@@ -188,3 +188,33 @@ Esto genera automáticamente la descripción de la herramienta sin necesidad de 
 ### **Importancia de las Herramientas**
 Las herramientas permiten que los agentes de IA superen las limitaciones de los modelos de lenguaje, proporcionándoles acceso a información en tiempo real, cálculos avanzados y acciones especializadas. Su integración adecuada en los agentes mejora drásticamente su funcionalidad.
 
+-----
+### **Comprendiendo los Agentes de IA a través del Ciclo Pensamiento-Acción-Observación**
+
+Los **Agentes de IA** trabajan en un ciclo continuo compuesto por tres fases:  
+
+1. **Pensamiento (Thought):** El modelo analiza la consulta y decide el siguiente paso.  
+2. **Acción (Action):** El agente invoca herramientas con los argumentos adecuados.  
+3. **Observación (Observation):** Recibe la respuesta de la herramienta y ajusta su razonamiento.  
+
+Este proceso sigue un **bucle** que se repite hasta que se alcanza el objetivo del agente.
+
+---
+
+### **Ejemplo: Alfred, el Agente del Clima**  
+Un usuario pregunta: *"¿Cuál es el clima actual en Nueva York?"*  
+El agente Alfred sigue el ciclo:  
+
+1. **Pensamiento:** “Necesito obtener los datos del clima en Nueva York. Hay una herramienta disponible para ello.”  
+2. **Acción:** Alfred llama a la herramienta `get_weather` con el argumento `{ "location": "New York" }`.  
+3. **Observación:** Recibe la respuesta: *"Clima en Nueva York: parcialmente nublado, 15°C, 60% de humedad."*  
+4. **Reflexión:** Ahora que tiene los datos, puede generar la respuesta final.  
+5. **Acción Final:** Alfred responde al usuario con la información obtenida.  
+
+---
+
+### **Lecciones clave**
+✔ **Los agentes iteran hasta completar su objetivo:** Si un paso falla, pueden intentarlo nuevamente.  
+✔ **Integración de herramientas:** Permiten que el agente acceda a información en tiempo real.  
+✔ **Adaptación dinámica:** Cada ciclo mejora la respuesta del agente basándose en nuevas observaciones.  
+
