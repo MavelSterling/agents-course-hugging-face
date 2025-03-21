@@ -367,4 +367,55 @@ print(f"The current weather in New York is: {result}")
 ✔ **Los agentes de IA ejecutan acciones en distintos formatos** (JSON, código o llamadas a funciones).  
 ✔ **El método "Stop and Parse" garantiza respuestas precisas y estructuradas.**  
 ✔ **Los Code Agents ofrecen mayor flexibilidad, pero requieren ejecución externa.**  
+-----
 
+### **Observe – Integrando Retroalimentación para Reflexionar y Adaptarse**
+
+La fase **Observe** es cuando el **Agente de IA percibe las consecuencias de sus acciones**. Las observaciones proporcionan retroalimentación valiosa que impulsa el razonamiento del agente y guía sus futuras decisiones.
+
+---
+
+### **¿Qué sucede en esta fase?**
+
+1. **Recopila Retroalimentación:**  
+   Recibe datos que indican si la acción fue exitosa o fallida (por ejemplo, la respuesta de una API).
+
+2. **Actualiza el Contexto:**  
+   La observación se añade a la "memoria" del agente (es decir, al prompt), para mantenerlo informado del estado actual.
+
+3. **Adapta su Estrategia:**  
+   El agente usa esta nueva información para ajustar su razonamiento y decidir los siguientes pasos.
+
+---
+
+### **Ejemplo:**
+Si un agente llama a una API del clima y recibe:  
+*“parcialmente nublado, 15°C, 60% de humedad”*,  
+esa respuesta se convierte en una **observación**, y se integra al prompt como nuevo contexto. Con ello, el agente puede decidir si ya tiene lo necesario para responder al usuario o si necesita realizar otra acción.
+
+---
+
+### **Tipos de Observaciones**
+
+| **Tipo**             | **Ejemplo**                                                |
+|----------------------|------------------------------------------------------------|
+| **Retroalimentación del sistema** | Mensajes de error, códigos de estado, confirmaciones. |
+| **Cambios de datos**             | Actualizaciones en bases de datos, archivos, o estados. |
+| **Datos del entorno**            | Lecturas de sensores, métricas del sistema.             |
+| **Análisis de respuestas**       | Respuestas de APIs, resultados de cálculos.             |
+| **Eventos basados en tiempo**    | Tareas programadas completadas, plazos alcanzados.      |
+
+---
+
+### **¿Cómo se integran las observaciones?**
+
+1. El agente genera una acción.  
+2. El entorno (framework) **ejecuta la acción**.  
+3. El resultado se **añade como observación** al prompt.  
+4. El agente **reanuda su razonamiento**, incorporando ese nuevo contexto.
+
+---
+
+### **Nota**
+
+La fase **Observe** permite que los agentes sean **adaptativos, reflexivos y dinámicos**. Al integrar retroalimentación constantemente, el agente puede **afinar su comportamiento, corregir errores y tomar mejores decisiones** en cada ciclo.
