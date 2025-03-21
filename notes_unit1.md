@@ -217,4 +217,74 @@ El agente Alfred sigue el ciclo:
 ✔ **Los agentes iteran hasta completar su objetivo:** Si un paso falla, pueden intentarlo nuevamente.  
 ✔ **Integración de herramientas:** Permiten que el agente acceda a información en tiempo real.  
 ✔ **Adaptación dinámica:** Cada ciclo mejora la respuesta del agente basándose en nuevas observaciones.  
+----
+### **Resumen: Razonamiento Interno y el Enfoque ReAct en los Agentes de IA**  
 
+El **razonamiento interno (Thought)** de un agente de IA es su capacidad para analizar información, descomponer problemas complejos en pasos más manejables y decidir qué acción tomar a continuación. Este proceso permite a los modelos **ajustar sus planes en función de nueva información y reflexionar sobre decisiones previas**.
+
+Los pensamientos pueden incluir:  
+✔ **Planificación:** Definir pasos para resolver una tarea.  
+✔ **Análisis:** Identificar problemas y evaluar soluciones.  
+✔ **Toma de decisiones:** Elegir la mejor acción basada en restricciones.  
+✔ **Resolución de problemas:** Optimizar estrategias para mejorar resultados.  
+✔ **Integración de memoria:** Recordar preferencias del usuario.  
+✔ **Autorreflexión:** Evaluar enfoques pasados y corregir errores.  
+✔ **Priorización:** Determinar qué tareas son más urgentes.  
+
+---
+
+### **El Enfoque ReAct: Razonar antes de Actuar**  
+**ReAct (Reasoning + Acting)** es una técnica de prompting que **fomenta que el modelo piense paso a paso antes de actuar**.  
+✔ En lugar de generar una respuesta inmediata, el LLM primero analiza el problema y elabora un plan.  
+✔ Se implementa con prompts como *"Let’s think step by step"*, lo que reduce errores y mejora la calidad de la respuesta.  
+
+Además, modelos como **Deepseek R1 y OpenAI’s o1** han sido entrenados para incluir automáticamente secciones de pensamiento antes de responder, utilizando tokens especiales `<think>...</think>`.  
+
+---
+
+## **Técnicas de Prompting: Few-Shot, Few-Shot-CoT, Zero-Shot y Zero-Shot-CoT (Ours)**  
+
+### **1️⃣ Zero-Shot**  
+✔ El modelo recibe la pregunta sin ejemplos previos.  
+✔ Responde directamente basándose en su entrenamiento.  
+✔ **Ejemplo:**  
+   **Prompt:** *“¿Cuál es la capital de Francia?”*  
+   **Respuesta:** *“París”*  
+
+### **2️⃣ Zero-Shot-CoT (Chain of Thought - Ours)**  
+✔ Similar a Zero-Shot, pero el modelo es instruido para razonar antes de responder.  
+✔ Se usa un prompt como *"Explícame paso a paso antes de dar la respuesta."*  
+✔ **Ejemplo:**  
+   **Prompt:** *“¿Cuántas patas tienen tres gatos en total?”*  
+   **Respuesta:**  
+   1. Un gato tiene 4 patas.  
+   2. Tres gatos tienen 3 × 4 = 12 patas.  
+   3. Respuesta final: *12 patas.*  
+
+### **3️⃣ Few-Shot**  
+✔ Se proporcionan algunos ejemplos antes de la pregunta principal.  
+✔ El modelo aprende del patrón y lo aplica a nuevas consultas.  
+✔ **Ejemplo:**  
+   **Prompt:**  
+   - *Ejemplo 1: Un perro tiene 4 patas. Un gato tiene 4 patas.*  
+   - *Ejemplo 2: Un caballo tiene 4 patas.*  
+   - *Pregunta: ¿Cuántas patas tiene un elefante?*  
+   **Respuesta:** *4 patas*  
+
+### **4️⃣ Few-Shot-CoT (Chain of Thought)**  
+✔ Combina ejemplos con razonamiento paso a paso.  
+✔ Mejora la precisión en problemas más complejos.  
+✔ **Ejemplo:**  
+   **Prompt:**  
+   - *Ejemplo 1:* "Si un tren recorre 60 km en una hora, en 3 horas recorrerá 180 km."  
+   - *Ejemplo 2:* "Si un coche viaja a 50 km/h, en 4 horas recorrerá 200 km."  
+   - *Pregunta:* "Si un avión viaja a 800 km/h, ¿cuánto recorrerá en 2 horas?"  
+   **Respuesta:**  
+   1. El avión viaja a 800 km/h.  
+   2. En 2 horas recorrerá 800 × 2 = 1600 km.  
+   3. **Respuesta final:** *1600 km*  
+
+---
+
+### **Notas**  
+El uso de **ReAct** y **Chain of Thought (CoT)** mejora la capacidad de los agentes de IA para **razonar antes de responder**, lo que resulta en respuestas más precisas y estructuradas. **Zero-Shot y Few-Shot** permiten ajustar el nivel de contexto necesario, con **Zero-Shot-CoT y Few-Shot-CoT** ofreciendo las mejores soluciones para tareas complejas.
